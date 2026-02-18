@@ -1,0 +1,16 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="ribbon.OnAddinLoad">
+    <ribbon startFromScratch="false">
+        <tabs>
+            <tab idMso="TabHome">
+				<group id="btnDemoGroup" label="测试">
+                    <button id="btnShowTaskPane" label="弹任务窗格网页" onAction="ribbon.OnAction" getImage="ribbon.GetImage" size="large"/>                    
+                    <button id="btnShowDialog" label="弹对话框网页" onAction="ribbon.OnAction" getImage="ribbon.GetImage" getVisible="ribbon.OnGetVisible" size="large"/>
+                    <button id="btnShowMsg" label="弹出消息框" onAction="ribbon.OnAction" getImage="ribbon.GetImage" visible="true" size="large"/>
+                    <!-- <button id="btnIsEnbable" getLabel="ribbon.OnGetLabel" onAction="ribbon.OnAction" enabled="true"  getImage="ribbon.GetImage" visible="true" size="large"/> -->
+                    <!-- <button id="btnApiEvent" getLabel="ribbon.OnGetLabel" onAction="ribbon.OnAction" getEnabled="ribbon.OnGetEnabled"  getImage="ribbon.GetImage" getVisible="ribbon.OnGetVisible" size="large"/> -->
+                    <!-- <button id="btnWebNotify" label="给业务系统发通知" onAction="ribbon.OnAction" enabled="true"  getImage="ribbon.GetImage" getVisible="ribbon.OnGetVisible" size="large"/> -->
+				</group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>

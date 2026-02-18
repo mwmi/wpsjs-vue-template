@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "WPS Vue3",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:3889",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        },
+    ]
+}
