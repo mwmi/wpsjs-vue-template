@@ -94,6 +94,8 @@ pnpm install
 # npm install
 ```
 
+打开`package.json`将`name`修改成你的项目名称
+
 ## ⚙️ 配置文件详解
 
 ### Vite 配置
