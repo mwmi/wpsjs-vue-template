@@ -56,72 +56,59 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue'
-import dlgFunc from '../scripts/dialog.js'
 import axios from 'axios'
+import dlgFunc from "../scripts/dialog.js"
+import Util from "../scripts/util.js"
 
-export default {
-  name: 'Dialog',
-  setup() {
-    const DemoSpan = ref('')
-    const docName = ref('')
+const DemoSpan = ref('')
+const docName = ref('')
 
-    const onbuttonclick = (id) => {
-      return dlgFunc.onbuttonclick(id)
-    }
-
-    const onDocNameClick = () => {
-      docName.value = dlgFunc.onbuttonclick('getDocName')
-    }
-
-    const onOpenWeb = () => {
-      const url = DemoSpan.value || 'http://localhost:3889'
-      console.log('尝试打开 URL:', url)
-      dlgFunc.onbuttonclick('openWeb', url)
-    }
-
-    const refreshDemoUrl = () => {
-      console.log('正在刷新 Demo URL...')
-      axios.get('/.debugTemp/NotifyDemoUrl')
-        .then((res) => {
-          if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
-            DemoSpan.value = 'http://localhost:3889'
-            console.log('检测到 HTML 响应，使用默认 URL')
-          } else {
-            DemoSpan.value = res.data
-            console.log('成功获取 URL:', res.data)
-          }
-        })
-        .catch((error) => {
-          console.warn('刷新 URL 失败:', error)
-          DemoSpan.value = 'http://localhost:3889'
-        })
-    }
-
-    onMounted(() => {
-      axios.get('/.debugTemp/NotifyDemoUrl')
-        .then((res) => {
-          if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
-            DemoSpan.value = 'http://localhost:3889'
-          } else {
-            DemoSpan.value = res.data
-          }
-        })
-        .catch((error) => {
-          console.warn('无法获取 demo URL:', error)
-          DemoSpan.value = 'http://localhost:3889'
-        })
-    })
-
-    return {
-      DemoSpan,
-      docName,
-      onbuttonclick,
-      onDocNameClick,
-      onOpenWeb,
-      refreshDemoUrl
-    }
-  }
+const onbuttonclick = (id) => {
+  return dlgFunc.onbuttonclick(id)
 }
+
+const onDocNameClick = () => {
+  docName.value = dlgFunc.onbuttonclick('getDocName')
+}
+
+const onOpenWeb = () => {
+  const url = DemoSpan.value || 'http://localhost:3889'
+  console.log('尝试打开 URL:', url)
+  Util.shellExecute(url)
+}
+
+const refreshDemoUrl = () => {
+  console.log('正在刷新 Demo URL...')
+  axios.get('/.debugTemp/NotifyDemoUrl')
+    .then((res) => {
+      if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
+        DemoSpan.value = 'http://localhost:3889'
+        console.log('检测到 HTML 响应，使用默认 URL')
+      } else {
+        DemoSpan.value = res.data
+        console.log('成功获取 URL:', res.data)
+      }
+    })
+    .catch((error) => {
+      console.warn('刷新 URL 失败:', error)
+      DemoSpan.value = 'http://localhost:3889'
+    })
+}
+
+onMounted(() => {
+  axios.get('/.debugTemp/NotifyDemoUrl')
+    .then((res) => {
+      if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
+        DemoSpan.value = 'http://localhost:3889'
+      } else {
+        DemoSpan.value = res.data
+      }
+    })
+    .catch((error) => {
+      console.warn('无法获取 demo URL:', error)
+      DemoSpan.value = 'http://localhost:3889'
+    })
+})
 </script>

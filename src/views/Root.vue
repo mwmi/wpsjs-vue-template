@@ -109,34 +109,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useRouter } from 'vue-router'
 
-export default {
-  name: 'Root',
-  setup() {
-    const router = useRouter()
+const router = useRouter()
 
-    const navigateTo = (path) => {
-      console.log('导航到:', path)
-      router.push(path)
-    }
+const navigateTo = (path) => {
+  console.log('导航到:', path)
+  router.push(path)
+}
 
-    const openExternalLink = (url) => {
-      console.log('打开外部链接:', url)
-      window.open(url, '_blank')
-    }
+const openExternalLink = (url) => {
+  console.log('打开外部链接:', url)
+  window.open(url, '_blank')
+}
 
-    const refreshPage = () => {
-      console.log('刷新页面')
-      window.location.reload()
-    }
-
-    return {
-      navigateTo,
-      openExternalLink,
-      refreshPage
-    }
-  }
+const refreshPage = () => {
+  console.log('刷新页面')
+  window.location.reload()
 }
 </script>
